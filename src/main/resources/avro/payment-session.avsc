@@ -1,0 +1,11 @@
+{
+  "namespace" : "com.example.portadapter.api.services.kafka.model",
+  "type" : "record",
+  "name" : "PaymentSessionKafka",
+  "fields" : [
+    {"name":"id","type":"string"},
+    {"name":"amount", "type":"double", "default":0.0},
+    {"name":"currency","type":"string"},
+    {"name":"amountDueGuid","type":"string"}
+  ]
+}

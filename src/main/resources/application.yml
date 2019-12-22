@@ -1,0 +1,32 @@
+
+remit:
+  kafka:
+    brokers: localhost
+    schema-registry: http://localhost:8081
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: payment-session
+          consumer:
+            useNativeDecoding: true
+        output:
+          destination: payment-session
+          producer:
+            useNativeEncoding: true
+
+      kafka:
+        binder:
+          brokers: ${remit.kafka.brokers}
+          producer-properties:
+            schema.registry.url: ${remit.kafka.schema-registry}
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            value.subject.name.strategy: io.confluent.kafka.serializers.subject.RecordNameStrategy
+          consumer-properties:
+            schema.registry.url: ${remit.kafka.schema-registry}
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+server.port: 9009
