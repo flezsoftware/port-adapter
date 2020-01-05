@@ -17,7 +17,7 @@ import org.springframework.data.redis.core.index.Indexed;
 @Setter
 @AllArgsConstructor
 @PaymentStatusRestricted
-public class PaymentSessionRedis implements PaymentSession<String> {
+public class PaymentSessionRedis extends PaymentSession<String> {
     @Id
     private String id;
 
@@ -26,8 +26,6 @@ public class PaymentSessionRedis implements PaymentSession<String> {
 
     private Double amount;
 
-    @Indexed
-    private String country;
     @Indexed
     private PaymentStatus status;
 

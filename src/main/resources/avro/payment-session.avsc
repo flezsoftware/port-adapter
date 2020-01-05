@@ -6,6 +6,15 @@
     {"name":"id","type":"string"},
     {"name":"amount", "type":"double", "default":0.0},
     {"name":"currency","type":"string"},
-    {"name":"amountDueGuid","type":"string"}
+    {"name":"amountDueGuid","type":"string"},
+    {
+                "name": "status",
+                "type": ["null", {
+                        "type": "enum",
+                        "name": "PaymentStatus",
+                        "symbols": ["ONE", "TWO", "THREE"]
+                    }
+                ]
+    }
   ]
 }

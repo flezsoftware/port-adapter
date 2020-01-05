@@ -1,15 +1,19 @@
-package com.example.portadapter.api.services.rest.model;
+package com.example.portadapter.api.services.kafka.model;
 
 import com.example.portadapter.api.domain.model.PaymentSession;
 import com.example.portadapter.api.domain.model.PaymentStatus;
+import com.example.portadapter.api.domain.validators.PaymentStatusRestricted;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 
 @Getter
 @Setter
-@Value
-public class PaymentSessionRest extends PaymentSession<String> {
+@AllArgsConstructor
+@NoArgsConstructor
+@PaymentStatusRestricted
+public class PaymentSessionKafkaDomain extends PaymentSession<String> {
 
     private String id;
 

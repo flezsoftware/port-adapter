@@ -1,31 +1,29 @@
 package com.example.portadapter.api.domain.model;
 
 
-public interface PaymentSession<ID> {
+public abstract class PaymentSession<ID> {
 
-    ID getId();
+    public abstract ID getId();
 
-    String getCurrency();
+    public abstract String getCurrency();
 
-    String getCountry();
+    public abstract ID getAmountDueGuid();
 
-    ID getAmountDueGuid();
+    public abstract PaymentStatus getStatus();
 
-    PaymentStatus getStatus();
+    public abstract Double getAmount();
 
-    Double getAmount();
+/*    public abstract void setId(ID id);
 
-    void setId(ID id);
+    public abstract void setAmountDueGuid(ID id);
 
-    void setAmountDueGuid(ID id);
+    public abstract void setStatus(PaymentStatus status);
 
-    void setStatus(PaymentStatus status);
+    public abstract void setCurrency(String currency);
 
-    void setCurrency(String currency);
+    public abstract void setCountry(String country);
 
-    void setCountry(String country);
-
-    void setAmount(Double amount);
+    public abstract void setAmount(Double amount);*/
 
 
 }

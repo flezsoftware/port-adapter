@@ -1,8 +1,8 @@
 
 remit:
   kafka:
-    brokers: localhost
-    schema-registry: http://localhost:8081
+    brokers: localhost:9093
+    schema-registry: http://localhost:8085
 
 spring:
   cloud:
@@ -16,8 +16,24 @@ spring:
           destination: payment-session
           producer:
             useNativeEncoding: true
-
+        ktable:
+          destination: payment-session
+          producer:
+            useNativeEncoding: true
       kafka:
+        streams:
+          bindings:
+            ktable:
+              consumer:
+                materializedAs: payment-session-storage-db
+          binder:
+            brokers: ${remit.kafka.brokers}
+            configuration:
+             default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+             default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+             commit.interval.ms: 1000
+             schema.registry.url: ${remit.kafka.schema-registry}
+
         binder:
           brokers: ${remit.kafka.brokers}
           producer-properties:
@@ -29,4 +45,3 @@ spring:
             schema.registry.url: ${remit.kafka.schema-registry}
             key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
             value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-server.port: 9009

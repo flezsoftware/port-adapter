@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Profile("mongo")
 @Document
@@ -17,21 +18,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 @PaymentStatusRestricted
-public class PaymentSessionMongo implements PaymentSession<String> {
+public class PaymentSessionMongo extends PaymentSession<String> {
+
     @Id
     private String id;
 
-    @Indexed(unique = true)
+    @Indexed
     private String currency;
 
     private Double amount;
 
-    @Indexed(unique = true)
-    private String country;
-
     @Indexed
     private PaymentStatus status;
 
+    @Indexed
     private String amountDueGuid;
 
 }
